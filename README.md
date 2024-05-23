@@ -4,24 +4,24 @@
 Os dados usados para este projeto foram obtidos a partir de Boletins informativos e casos do coronavírus por município por dia obtidos dos boletins das Secretarias Estaduais de Saúde. Estão disponíveis para download na página https://brasil.io/dataset/covid19/caso/
 
 Estão organizados nas seguintes colunas:
-city
-city_ibge_cod
-epidemiological_week
-estimated_population
-estimated_population_2019
-is_last
-is_repeated
-last_available_confirmed
-last_available_confirmed_per_100k_inhabitants
-last_available_date
-last_available_death_rate
-last_available_deaths
-order_for_place
-place_type
-state
-new_confirmed
-new_deaths
-
+* city
+* city_ibge_cod
+* epidemiological_week
+* estimated_population
+* estimated_population_2019
+* is_last
+* is_repeated
+* last_available_confirmed
+* last_available_confirmed_per_100k_inhabitants
+* last_available_date
+* last_available_death_rate
+* last_available_deaths
+* order_for_place
+* place_type
+* state
+* new_confirmed
+* new_deaths
+  
 O conjunto de dados conta com 3.853.648 entradas, cada uma correspondendo a um conjunto de dados diários sobre COVID em um determinado município/unidade federativa brasleira.
 
 De forma a simplificar o processo de análise, os dados foram ordenados por data de geração e foi adicionada uma coluna (num_item), a qual servirá de id de cada entrada.
