@@ -6,6 +6,7 @@ Os dados usados para este projeto foram obtidos a partir de Boletins informativo
 Estão organizados nas seguintes colunas:
 * city
 * city_ibge_cod
+* date
 * epidemiological_week
 * estimated_population
 * estimated_population_2019
@@ -25,6 +26,8 @@ Estão organizados nas seguintes colunas:
 O conjunto de dados conta com 3.853.648 entradas, cada uma correspondendo a um conjunto de dados diários sobre COVID em um determinado município/unidade federativa brasleira.
 
 De forma a simplificar o processo de análise, os dados foram ordenados por data de geração e foi adicionada uma coluna (num_item), a qual servirá de id de cada entrada.
+
+Ademais, visto que os dados no conjunto possuem um caráter cronológico, os dados foram ordenados por data de referência das informações (coluna `date`).
 
 ## Modificação nos Dados
 O objetivo dos dados é serem processados para serem enviados a um Context Broker (Orion) em uma estrutura Fiware, emulando um fluxo contínuo de dados sendo gerados e publicados dia a dia, pelas Secretarias de Saúde de Municípios e Estados brasileiros. Para simplificar o processo, os dados foram migrados do arquivo CSV original para um banco de dados SQLite, como formato intermediário ao formato alvo final.
