@@ -64,11 +64,11 @@ class NGSI_Wrapper:
         },
         "ultima" : {
             "type" : "Boolean",
-            "value" : str(linha_tabela[7]).lower()
+            "value" : str(linha_tabela[7]==1).lower()
         },
         "repetida" : {
             "type" : "Boolean",
-            "value" : str(linha_tabela[8]).lower()
+            "value" : str(linha_tabela[8]==1).lower()
         },
         "ultimo_confirmados_disponivel" : {
             "type" : "Numeric",
@@ -124,11 +124,11 @@ class NGSI_Wrapper:
     print(response.reason)
     print(response.text)
 
-  def gerar_fluxo_dados(self, verboso=False):
+  def gerar_fluxo_dados(self, verboso=False, intervalo=5):
     contador = 0
     while contador < 200:
         self.post_proximo_valor(verboso=verboso)
-        time.sleep(5)
+        time.sleep(intervalo)
 
     response = requests.get('http://localhost:1026/v2/entities?type=Daily_COVID_Cases_In_City&options=keyValues')
     print(response.status_code)
