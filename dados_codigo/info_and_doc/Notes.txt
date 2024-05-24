@@ -1,0 +1,8 @@
+EXEMPLO DE COMO REMOVER ENTIDADS DO BROKER:
+curl --location 'http://localhost:1026/v2/op/update' --header 'Content-Type: application/json' --data '{
+"actionType":"delete",
+  "entities":[
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:8", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:9", "type":"Daily_COVID_Cases_In_City"}
+  ]
+}'

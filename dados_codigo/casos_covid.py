@@ -9,134 +9,157 @@ class Tabela:
   def __init__(self, banco_de_dados, tabela):
     self.banco_de_dados = banco_de_dados
     self.tabela = tabela
-    self.conexao = sqlite3.connect(tabela)
+    self.conexao = sqlite3.connect(self.banco_de_dados)
     self.cursor = self.conexao.cursor()
 
-  def selectColunaValor(self, coluna, valor):
-    resultado = self.cursor.execute(f'SELECT * FROM {self.tabela} WHERE {coluna} = {valor}')
-    return resultado.fetchall()
-
-  def selectFlexivel(self, condicao_where=''):
-    query = f'SELECT * FROM {self.tabela} ' + condicao_where
-    print(f'Query resultante:\n{query}')
+  def executar(self, query):
     resultado = self.cursor.execute(query)
-    return resultado.fetchall()
+    valores = resultado.fetchall()
+    self.conexao.commit()
+    return valores
+
+  def encerrar_conexao(self):
+    self.conexao.close()
 
 class NGSI_Wrapper:
-  def __init__(self, banco_de_dados, tabela, offset=0):
-    self.offset = offset
+  def __init__(self, banco_de_dados, tabela):
     self.tabela = Tabela(banco_de_dados, tabela)
+
+  def encerrar_conexao(self):
+    self.tabela.encerrar_conexao()
   
-  def selectProximo(self):
-    query = f'LIMIT 1 OFFSET {self.offset}'
-    resultado = self.tabela.selectFlexivel(query)
-    self.offset += 1
+  def executar_query(self, query):
+    resultado = self.tabela.executar(query)
     return resultado
-  
-  def get_proximo_valor_formatado(self, verboso=False):
-    linha_tabela = self.selectProximo()[0]
-    payload = {
-        "type" : "Daily_COVID_Cases_In_City",
-        "id" : f"urn:ngsi-ld:Daily_COVID_Cases_In_City:{linha_tabela[0]}",
-        "cidade" : {
-            "type" : "Text",
-            "value" : linha_tabela[1]
-        },
-        "codigo_cidade_IBGE" : {
-            "type" : "Text",
-            "value" : linha_tabela[2]
-        },
-        "data" : {
-            "type" : "Date",
-            "value" : linha_tabela[3]
-        },
-        "semana_epidemiologica" : {
-            "type" : "Integer",
-            "value" : linha_tabela[4]
-        },
-        "populacao_estimada" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[5]
-        },
-        "populacao_estimada_2019" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[6]
-        },
-        "ultima" : {
-            "type" : "Boolean",
-            "value" : str(linha_tabela[7]==1).lower()
-        },
-        "repetida" : {
-            "type" : "Boolean",
-            "value" : str(linha_tabela[8]==1).lower()
-        },
-        "ultimo_confirmados_disponivel" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[9]
-        },
-        "ultimo_confirmados_por_100K_habit_disponivel" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[10]
-        },
-        "ultimo_data_disponivel" : {
-            "type" : "Date",
-            "value" : linha_tabela[11]
-        },
-        "ultimo_taxa_de_obito_disponivel" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[12]
-        },
-        "ultimo_obitos_disponivel" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[13]
-        },
-        "ordem_da_localidade" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[14]
-        },
-        "tipo_da_localidade" : {
-            "type" : "Text",
-            "value" : linha_tabela[15]
-        },
-        "unidade_federativa" : {
-            "type" : "Text",
-            "value" : linha_tabela[16]
-        },
-        "novo_confirmados" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[17]
-        },
-        "novo_obitos" : {
-            "type" : "Numeric",
-            "value" : linha_tabela[18]
-        },
+
+  def get_registro_formatado(self, registro, verboso=False):
+    reg_formatado = {
+      "type" : "Daily_COVID_Cases_In_City",
+      "id" : f"urn:ngsi-ld:Daily_COVID_Cases_In_City:{registro[0]}",
+      "cidade" : {
+        "type" : "Text",
+        "value" : registro[1]
+      },
+      "codigo_cidade_IBGE" : {
+        "type" : "Text",
+        "value" : registro[2]
+      },
+      "data" : {
+        "type" : "Date",
+        "value" : registro[3]
+      },
+      "semana_epidemiologica" : {
+        "type" : "Integer",
+        "value" : registro[4]
+      },
+      "populacao_estimada" : {
+        "type" : "Numeric",
+        "value" : registro[5]
+      },
+      "populacao_estimada_2019" : {
+        "type" : "Numeric",
+        "value" : registro[6]
+      },
+      "ultima" : {
+        "type" : "Boolean",
+        "value" : str(registro[7]==1).lower()
+      },
+      "repetida" : {
+        "type" : "Boolean",
+        "value" : str(registro[8]==1).lower()
+      },
+      "ultimo_confirmados_disponivel" : {
+        "type" : "Numeric",
+        "value" : registro[9]
+      },
+      "ultimo_confirmados_por_100K_habit_disponivel" : {
+        "type" : "Numeric",
+        "value" : registro[10]
+      },
+      "ultimo_data_disponivel" : {
+        "type" : "Date",
+        "value" : registro[11]
+      },
+      "ultimo_taxa_de_obito_disponivel" : {
+        "type" : "Numeric",
+        "value" : registro[12]
+      },
+      "ultimo_obitos_disponivel" : {
+        "type" : "Numeric",
+        "value" : registro[13]
+      },
+      "ordem_da_localidade" : {
+        "type" : "Numeric",
+        "value" : registro[14]
+      },
+      "tipo_da_localidade" : {
+        "type" : "Text",
+        "value" : registro[15]
+      },
+      "unidade_federativa" : {
+        "type" : "Text",
+        "value" : registro[16]
+      },
+      "novo_confirmados" : {
+        "type" : "Numeric",
+        "value" : registro[17]
+      },
+      "novo_obitos" : {
+        "type" : "Numeric",
+        "value" : registro[18]
+      },
     }
+    
+    if verboso:
+      print('Registro formatado:')
+      print(reg_formatado, '\n')
+    return reg_formatado
 
-    obj_json = json.dumps(payload, ensure_ascii=False)
-    if verboso: print(obj_json)
-    return obj_json
+  def enviar_proximo_batch(self, verboso=False):
+    # selecionando próximo lote de envio
+    query = 'select * from casos_covid where date in (select date from casos_covid where sent_to_broker <> 1 order by date limit(1)) and sent_to_broker=0;'
+    prox_lote = self.executar_query(query)
+    qtd_itens = len(prox_lote)
+    intervalo = 60 / (len(prox_lote))
+    if intervalo > 10: intervalo = 5
+    if intervalo < 1: intervalo = 1
+    
+    if verboso: print(f"Enviando {qtd_itens} entradas ao broker (1 a cada {intervalo} segs.)")
+    for idx in range(len(prox_lote)):
+      item = prox_lote[idx]
+      if verboso: print(f">>> Item com id {item[0]} - {idx + 1} de {qtd_itens}")
+      reg_formatado = self.get_registro_formatado(item)
+      payload = json.dumps(reg_formatado, ensure_ascii=False)
+      headers = {'Content-Type': 'application/json'}
+      response = requests.post(URL_ORION, headers=headers, data=payload)
+      if response.status_code == 201:
+        query = f'update casos_covid set sent_to_broker = 1 where num_item = {item[0]}'
+        self.executar_query(query)
+      if verboso:
+        print(f'>>> Status do Envio {response.status_code}\n')
+        if response.status_code != 201: print(response.reason)
+      time.sleep(intervalo)
 
-  def post_proximo_valor(self, verboso=False):
-    payload = self.get_proximo_valor_formatado(verboso=verboso)
-    headers = {'Content-Type': 'application/json'}
-    response = requests.post(URL_ORION, headers=headers, data=payload)
-    print(response.status_code)
-    print(response.reason)
-    print(response.text)
+  def enviar_fluxo_ao_broker(self, verboso=True):
+    num_registros_por_enviar = self.executar_query('select count(*) from casos_covid where sent_to_broker = 0')[0][0]
+    while num_registros_por_enviar > 0:
+      if verboso: print('ENVIANDO NOVO LOTE...')
+      self.enviar_proximo_batch(verboso)
+      if verboso: print('ENVIO DO LOTE FINALIZADO...\n\n')
+    print('ENVIO DOS LOTES CONCLUÍDO')
 
-  def gerar_fluxo_dados(self, verboso=False, intervalo=5):
+  def gerar_fluxo_dados_sequencia(self, verboso=False, intervalo=5):
     contador = 0
     while contador < 200:
-        self.post_proximo_valor(verboso=verboso)
-        time.sleep(intervalo)
+      self.post_proximo_valor(verboso=verboso)
+      time.sleep(intervalo)
 
     response = requests.get('http://localhost:1026/v2/entities?type=Daily_COVID_Cases_In_City&options=keyValues')
     print(response.status_code)
     print(response.reason)
     print(response.text)
-
     print('CONCLUÍDO')
 
 
-poster = NGSI_Wrapper('casos_covid', 'casos_covid', 8)
-poster.gerar_fluxo_dados(verboso=False)
+poster = NGSI_Wrapper('casos_covid.db', 'casos_covid')
+poster.enviar_fluxo_ao_broker(verboso=True)
