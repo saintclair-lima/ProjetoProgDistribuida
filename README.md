@@ -113,3 +113,6 @@ De forma a ser aceito pelo Orion, os dados necessariamente devem estar de acordo
   }
 }
 ```
+# Informações sobre os municípios
+De forma a possibilitar a distrbuição dos dados por município em alguma representação gráfica, foram adicionadas informações do IBGE reference aos municípios.
+OS dados foram coletado da página do IBGE para publicação (https://geoftp.ibge.gov.br/organizacao_do_territorio/estrutura_territorial/localidades/) e processadas, resultando no arquivo csv `municipios.csv` ou em sqlite, no arquivo `municipios.db`.
