@@ -116,3 +116,4 @@ De forma a ser aceito pelo Orion, os dados necessariamente devem estar de acordo
 # Informações sobre os municípios
 De forma a possibilitar a distrbuição dos dados por município em alguma representação gráfica, foram adicionadas informações do IBGE reference aos municípios.
 OS dados foram coletado da página do IBGE para publicação (https://geoftp.ibge.gov.br/organizacao_do_territorio/estrutura_territorial/localidades/) e processadas, resultando no arquivo csv `municipios.csv` ou em sqlite, no arquivo `municipios.db`.
+Dada a distância temporal entre os dois datasets, há 6 municípios que constam do dataset de casos de COVID, porém não estavam na publicação do IBGE. Esses municípios tÊm pouco mais de 3.000 instâncias de relatório de casos diários de COVID no dataset de casos de covid.
