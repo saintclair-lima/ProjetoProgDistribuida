@@ -156,7 +156,7 @@ class NGSI_Wrapper:
       self.post_proximo_valor(verboso=verboso)
       time.sleep(intervalo)
 
-    response = requests.get('http://localhost:1026/v2/entities?type=Daily_COVID_Cases_In_City&options=keyValues')
+    response = requests.get(f'{URL_ORION}?type=Daily_COVID_Cases_In_City&options=keyValues')
     print(response.status_code)
     print(response.reason)
     print(response.text)
