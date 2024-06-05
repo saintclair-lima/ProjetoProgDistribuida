@@ -2,8 +2,10 @@ import sqlite3
 import json
 import requests
 import time
+import sys
 
-URL_ORION = 'http://localhost:1026/v2/entities'
+# URL_ORION = 'http://localhost:1026/v2/entities'
+URL_ORION = sys.argv[1]
 
 class Tabela:
   def __init__(self, banco_de_dados, tabela):

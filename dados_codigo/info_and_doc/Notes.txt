@@ -6,3 +6,9 @@ curl --location 'http://localhost:1026/v2/op/update' --header 'Content-Type: app
     {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:9", "type":"Daily_COVID_Cases_In_City"}
   ]
 }'
+
+Comando para inicializar o container já executando o script
+sudo docker exec -it ubuntu-python /bin/bash -c /home/ubuntu/ProjetoProgDistribuida/dados_codigo/runner.sh
+
+
+Referência da criação das instâncias docker (orion e mongo-db) que recebem as requisições
