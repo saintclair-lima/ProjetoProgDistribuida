@@ -118,3 +118,35 @@ De forma a possibilitar a distrbuição dos dados por município em alguma repre
 OS dados foram coletado da página do IBGE para publicação (https://geoftp.ibge.gov.br/organizacao_do_territorio/estrutura_territorial/localidades/) e processadas, resultando no arquivo csv `municipios.csv` ou em sqlite, no arquivo `municipios.db`.
 
 Dada a distância temporal entre os dois datasets, há 6 municípios que constam do dataset de casos de COVID, porém não estavam na publicação do IBGE. Esses municípios têm pouco mais de 3.000 instâncias de relatório de casos diários de COVID no dataset de casos de covid.
+
+A entidade de modelagem de municípios no Orion está no seguinte formato:
+```json
+{
+    "type" : "GeoLocationBrazilianMunicipality",
+    "id" : "urn:ngsi-ld:GeoLocationBrazilianMunicipality:{registro[0]}",
+    "municipality" : {
+    "type" : "Text",
+    "value" : "Taperoá"
+    },
+    "state" : {
+    "type" : "Text",
+    "value" : "PB"
+    },
+    "category" : {
+    "type" : "Text",
+    "value" : "city"
+    },
+    "longitude" : {
+    "type" : "Numeric",
+    "value" : -36.824277
+    },
+    "latitude" : {
+    "type" : "Numeric",
+    "value" : -7.209221
+    },
+    "altitude" : {
+    "type" : "Numeric",
+    "value" : 125.0
+    }
+}
+```
