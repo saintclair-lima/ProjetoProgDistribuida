@@ -140,7 +140,7 @@ class NGSI_Wrapper:
       if verboso:
         print(f'>>> Status do Envio {response.status_code}\n')
         if response.status_code != 201: print(response.reason)
-      time.sleep(intervalo)
+      #time.sleep(intervalo)
 
   def enviar_fluxo_ao_broker(self, verboso=True):
     num_registros_por_enviar = self.executar_query('select count(*) from casos_covid where sent_to_broker = 0')[0][0]
