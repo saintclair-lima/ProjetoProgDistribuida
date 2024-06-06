@@ -170,4 +170,4 @@ class NGSI_Wrapper:
 
 
 poster = NGSI_Wrapper('casos_covid.db', 'casos_covid')
-poster.enviar_fluxo_ao_broker(verboso=True)
+if __name__ == "__main__": poster.enviar_fluxo_ao_broker(verboso=True)
