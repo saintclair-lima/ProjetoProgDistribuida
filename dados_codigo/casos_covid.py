@@ -5,13 +5,13 @@ import time
 import sys
 
 # URL_ORION = 'http://10.7.99.170:3000/v2/entities'
-# TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
+# TOKEN = 'ee7ff0524bd473d4c8ffcb0ec8ee2d3a2af14fa5'
 try:
   URL_ORION = sys.argv[1]
-  TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
+  TOKEN = 'ee7ff0524bd473d4c8ffcb0ec8ee2d3a2af14fa5'
 except:
   URL_ORION = ''
-  TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
+  TOKEN = 'ee7ff0524bd473d4c8ffcb0ec8ee2d3a2af14fa5'
 
 class Tabela:
   def __init__(self, banco_de_dados, tabela):
