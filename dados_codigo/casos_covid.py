@@ -39,8 +39,8 @@ class NGSI_Wrapper:
 
   def get_registro_formatado(self, registro, verboso=False):
     reg_formatado = {
-      "type" : "Daily_COVID_Cases_In_City",
-      "id" : f"urn:ngsi-ld:Daily_COVID_Cases_In_City:{registro[0]}",
+      "type" : "Daily_COVID_Cases_In_City_Geolocation",
+      "id" : f"urn:ngsi-ld:Daily_COVID_Cases_In_City_Geolocation:{registro[0]}",
       "cidade" : {
         "type" : "Text",
         "value" : registro[1]
@@ -113,6 +113,22 @@ class NGSI_Wrapper:
         "type" : "Numeric",
         "value" : registro[18]
       },
+      "latitude" : {
+        "type" : "Numeric",
+        "value" : registro[20]
+      },
+      "longitude" : {
+        "type" : "Numeric",
+        "value" : registro[21]
+      },
+      "altitude" : {
+        "type" : "Numeric",
+        "value" : registro[22]
+      },
+      "timestamp" : {
+        "type" : "Text",
+        "value" : registro[22]
+      },
     }
     
     if verboso:
@@ -122,10 +138,9 @@ class NGSI_Wrapper:
 
   def enviar_proximo_batch(self, verboso=False):
     # selecionando próximo lote de envio
-    query = 'select * from casos_covid where date in (select date from casos_covid where sent_to_broker = 0 order by date limit(1)) and sent_to_broker=0;'
+    query = 'SELECT casos_covid.*, municipios.lat,municipios.long, municipios.alt, datetime() AS timestamp from casos_covid LEFT OUTER JOIN municipios ON casos_covid.city_ibge_code = municipios.codigo WHERE date IN (SELECT date FROM casos_covid WHERE sent_to_broker = 0 ORDER BY date LIMIT(1)) AND sent_to_broker=0;'
     prox_lote = self.executar_query(query)
     qtd_itens = len(prox_lote)
-    # intervalo = 10 / (len(prox_lote))
     intervalo = 1
     
     if verboso: print(f"Enviando {qtd_itens} entradas ao broker (1 a cada {intervalo} segs.)")
@@ -170,7 +185,7 @@ class NGSI_Wrapper:
       self.post_proximo_valor(verboso=verboso)
       time.sleep(intervalo)
 
-    response = requests.get(f'{URL_ORION}?type=Daily_COVID_Cases_In_City&options=keyValues')
+    response = requests.get(f'{URL_ORION}?type=Daily_COVID_Cases_In_City_Geolocation&options=keyValues')
     print(response.status_code)
     print(response.reason)
     print(response.text)
