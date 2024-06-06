@@ -145,7 +145,15 @@ class NGSI_Wrapper:
           print('Erro ao atualizar banco de dados')
       if verboso:
         print(f'>>> Status do Envio {response.status_code}\n')
-        if response.status_code != 201: print(response.reason)
+        if response.status_code != 201:
+          if response.status_code == 422:
+            query = f'update casos_covid set sent_to_broker = -1 where num_item = {item[0]}'
+            try: self.executar_query(query)
+            except:
+              with open('log.txt', 'a') as arq:
+                arq.write(f'Erro ao executar query: {query}\n')
+              print('Erro ao atualizar banco de dados')
+          print(response.reason)
       time.sleep(intervalo)
 
   def enviar_fluxo_ao_broker(self, verboso=True):
