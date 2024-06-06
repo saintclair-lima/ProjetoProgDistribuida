@@ -1,11 +1,20 @@
 EXEMPLO DE COMO REMOVER ENTIDADS DO BROKER:
-curl --location 'http://localhost:1026/v2/op/update' --header 'Content-Type: application/json' --data '{
+curl --location 'http://10.3.225.203:1026/v2/op/update' --header 'Content-Type: application/json' --data '{
 "actionType":"delete",
   "entities":[
-    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:8", "type":"Daily_COVID_Cases_In_City"},
-    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:9", "type":"Daily_COVID_Cases_In_City"}
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:1", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:2", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:3", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:4", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:5", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:6", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:7", "type":"Daily_COVID_Cases_In_City"},
+    {"id":"urn:ngsi-ld:Daily_COVID_Cases_In_City:8", "type":"Daily_COVID_Cases_In_City"}
   ]
 }'
+
+EXEMPLO DE COMO CONSULTAR ENTIDADS NO BROKER
+http://http://10.3.225.203:1026/v2/entities?type=Daily_COVID_Cases_In_City&options=keyValues
 
 Comando para inicializar o container já executando o script
 sudo docker exec -it ubuntu-python /bin/bash -c /home/ubuntu/ProjetoProgDistribuida/dados_codigo/runner.sh

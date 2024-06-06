@@ -122,9 +122,8 @@ class NGSI_Wrapper:
     query = 'select * from casos_covid where date in (select date from casos_covid where sent_to_broker <> 1 order by date limit(1)) and sent_to_broker=0;'
     prox_lote = self.executar_query(query)
     qtd_itens = len(prox_lote)
-    intervalo = 10 / (len(prox_lote))
-    #if intervalo > 10: intervalo = 5
-    #if intervalo < 1: intervalo = 1
+    # intervalo = 10 / (len(prox_lote))
+    intervalo = len(prox_lote)
     
     if verboso: print(f"Enviando {qtd_itens} entradas ao broker (1 a cada {intervalo} segs.)")
     for idx in range(len(prox_lote)):
