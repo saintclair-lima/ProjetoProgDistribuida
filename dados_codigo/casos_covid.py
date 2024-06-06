@@ -153,6 +153,7 @@ class NGSI_Wrapper:
       reg_formatado = self.get_registro_formatado(item)
       payload = json.dumps(reg_formatado, ensure_ascii=False)
       headers = {'Content-Type': 'application/json', 'X-Auth-token': TOKEN}
+      print("HERDERS:", headers)
       response = requests.post(URL_ORION, headers=headers, data=payload)
       if response.status_code == 201:
         query = f'update casos_covid set sent_to_broker = 1 where num_item = {item[0]}'
