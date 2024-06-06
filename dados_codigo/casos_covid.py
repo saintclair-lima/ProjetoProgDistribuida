@@ -8,10 +8,10 @@ import sys
 # TOKEN = 'ee7ff0524bd473d4c8ffcb0ec8ee2d3a2af14fa5'
 try:
   URL_ORION = sys.argv[1]
-  TOKEN = 'ee7ff0524bd473d4c8ffcb0ec8ee2d3a2af14fa5'
+  TOKEN = sys.argv[2]
 except:
   URL_ORION = ''
-  TOKEN = 'ee7ff0524bd473d4c8ffcb0ec8ee2d3a2af14fa5'
+  TOKEN = ''
 
 class Tabela:
   def __init__(self, banco_de_dados, tabela):
