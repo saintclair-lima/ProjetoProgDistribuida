@@ -123,7 +123,7 @@ A entidade de modelagem de municípios no Orion está no seguinte formato:
 ```json
 {
     "type" : "GeoLocationBrazilianMunicipality",
-    "id" : f"urn:ngsi-ld:GeoLocationBrazilianMunicipality:{registro[0]}",
+    "id" : "urn:ngsi-ld:GeoLocationBrazilianMunicipality:{registro[0]}",
     "municipality" : {
     "type" : "Text",
     "value" : "Taperoá"
