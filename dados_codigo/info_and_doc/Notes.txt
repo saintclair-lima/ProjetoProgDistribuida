@@ -14,7 +14,13 @@ curl -G -X GET http://10.3.225.203:1026/v2/entities?type=Daily_COVID_Cases_In_Ci
 EXEMPLO DE COMO CONSULTAR A QUANTIDADE DE REGISTROS
 curl -i -G -X GET "http://10.3.225.203:1026/v2/entities" -d "type=Daily_COVID_Cases_In_City" -d "options=count" -d "limit=1"
 
+curl -G -X GET 'http://10.3.225.203:1026/v2/entities?type=Daily_COVID_Cases_In_City&options=keyValues&limit=1&orderBy="!id"'
 
+
+curl -iX POST \
+  'http://10.3.225.203:1026/v2/entities' \
+  -H 'Content-Type: application/json' \
+  -d '{"type": "Daily_COVID_Cases_In_City", "id": "urn:ngsi-ld:Daily_COVID_Cases_In_City:3839", "cidade": {"type": "Text", "value": "Balne\\u00e1rio Arroio do Silva"}, "codigo_cidade_IBGE": {"type": "Text", "value": 4201950}, "data": {"type": "Date", "value": "2020-03-31"}, "semana_epidemiologica": {"type": "Integer", "value": 202014}, "populacao_estimada": {"type": "Numeric", "value": 13430.0}, "populacao_estimada_2019": {"type": "Numeric", "value": 13071.0}, "ultima": {"type": "Boolean", "value": "false"}, "repetida": {"type": "Boolean", "value": "false"}, "ultimo_confirmados_disponivel": {"type": "Numeric", "value": 1.0}, "ultimo_confirmados_por_100K_habit_disponivel": {"type": "Numeric", "value": 7.44602}, "ultimo_data_disponivel": {"type": "Date", "value": "2020-03-31"}, "ultimo_taxa_de_obito_disponivel": {"type": "Numeric", "value": 0.0}, "ultimo_obitos_disponivel": {"type": "Numeric", "value": 0.0}, "ordem_da_localidade": {"type": "Numeric", "value": 7}, "tipo_da_localidade": {"type": "Text", "value": "city"}, "unidade_federativa": {"type": "Text", "value": "SC"}, "novo_confirmados": {"type": "Numeric", "value": 0.0}, "novo_obitos": {"type": "Numeric", "value": 0.0}}'
 
 Comando para inicializar o container já executando o script
 sudo docker exec -it ubuntu-python /bin/bash -c /home/ubuntu/ProjetoProgDistribuida/dados_codigo/runner.sh
