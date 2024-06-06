@@ -4,11 +4,14 @@ import requests
 import time
 import sys
 
-# URL_ORION = 'http://localhost:1026/v2/entities'
+# URL_ORION = 'http://10.7.99.170:3000/v2/entities'
+# TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
 try:
   URL_ORION = sys.argv[1]
+  TOKEN = sys.argv[2]
 except:
-  URL_ORION = ''
+  URL_ORION = 'http://10.7.99.170:3000/v2/entities'
+  TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
 
 class Tabela:
   def __init__(self, banco_de_dados, tabela):
@@ -149,7 +152,7 @@ class NGSI_Wrapper:
       if verboso: print(f">>> Item com id {item[0]} - {idx + 1} de {qtd_itens}")
       reg_formatado = self.get_registro_formatado(item)
       payload = json.dumps(reg_formatado, ensure_ascii=False)
-      headers = {'Content-Type': 'application/json'}
+      headers = {'Content-Type': 'application/json', 'X-Auth-token': TOKEN}
       response = requests.post(URL_ORION, headers=headers, data=payload)
       if response.status_code == 201:
         query = f'update casos_covid set sent_to_broker = 1 where num_item = {item[0]}'
