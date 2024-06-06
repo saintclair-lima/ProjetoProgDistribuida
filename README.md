@@ -138,11 +138,11 @@ A entidade de modelagem de municípios no Orion está no seguinte formato:
     },
     "longitude" : {
     "type" : "Numeric",
-    "value" : -3.321654
+    "value" : -36.824277
     },
     "latitude" : {
     "type" : "Numeric",
-    "value" : -32.321654
+    "value" : -7.209221
     },
     "altitude" : {
     "type" : "Numeric",
