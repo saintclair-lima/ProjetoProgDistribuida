@@ -144,7 +144,7 @@ class NGSI_Wrapper:
     query = 'SELECT casos_covid.*, municipios.lat,municipios.long, municipios.alt, datetime() AS timestamp from casos_covid LEFT OUTER JOIN municipios ON casos_covid.city_ibge_code = municipios.codigo WHERE date IN (SELECT date FROM casos_covid WHERE sent_to_broker = 0 ORDER BY date LIMIT(1)) AND sent_to_broker=0;'
     prox_lote = self.executar_query(query)
     qtd_itens = len(prox_lote)
-    intervalo = 1
+    #intervalo = 1
     
     if verboso: print(f"Enviando {qtd_itens} entradas ao broker")
     for idx in range(len(prox_lote)):
