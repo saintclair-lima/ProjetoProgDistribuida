@@ -5,7 +5,10 @@ import time
 import sys
 
 # URL_ORION = 'http://localhost:1026/v2/entities'
-URL_ORION = sys.argv[1]
+try:
+  URL_ORION = sys.argv[1]
+except:
+  URL_ORION = ''
 
 class Tabela:
   def __init__(self, banco_de_dados, tabela):
@@ -135,7 +138,9 @@ class NGSI_Wrapper:
       response = requests.post(URL_ORION, headers=headers, data=payload)
       if response.status_code == 201:
         query = f'update casos_covid set sent_to_broker = 1 where num_item = {item[0]}'
-        self.executar_query(query)
+        try: self.executar_query(query)
+        except:
+          print('Erro ao atualizar banco de dados')
       if verboso:
         print(f'>>> Status do Envio {response.status_code}\n')
         if response.status_code != 201: print(response.reason)
