@@ -146,7 +146,7 @@ class NGSI_Wrapper:
     qtd_itens = len(prox_lote)
     intervalo = 1
     
-    if verboso: print(f"Enviando {qtd_itens} entradas ao broker (1 a cada {intervalo} segs.)")
+    if verboso: print(f"Enviando {qtd_itens} entradas ao broker")
     for idx in range(len(prox_lote)):
       item = prox_lote[idx]
       if verboso: print(f">>> Item com id {item[0]} - {idx + 1} de {qtd_itens}")
@@ -172,7 +172,7 @@ class NGSI_Wrapper:
                 arq.write(f'Erro ao executar query: {query}\n')
               print('Erro ao atualizar banco de dados')
           print(response.reason)
-      time.sleep(intervalo)
+      #time.sleep(intervalo)
 
   def enviar_fluxo_ao_broker(self, verboso=True):
     num_registros_por_enviar = self.executar_query('select count(*) from casos_covid where sent_to_broker = 0')[0][0]
