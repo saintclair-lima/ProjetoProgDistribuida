@@ -8,9 +8,9 @@ import sys
 # TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
 try:
   URL_ORION = sys.argv[1]
-  TOKEN = sys.argv[2]
+  TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
 except:
-  URL_ORION = 'http://10.7.99.170:3000/v2/entities'
+  URL_ORION = ''
   TOKEN = '02d6ef1f0212f57b972ef1d2dd1b733d49f2214b'
 
 class Tabela:
