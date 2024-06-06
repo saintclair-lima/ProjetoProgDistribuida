@@ -140,6 +140,8 @@ class NGSI_Wrapper:
         query = f'update casos_covid set sent_to_broker = 1 where num_item = {item[0]}'
         try: self.executar_query(query)
         except:
+          with open('log.txt', 'w') as arq:
+            arq.write(f'Erro ao executar query:\n{query}')
           print('Erro ao atualizar banco de dados')
       if verboso:
         print(f'>>> Status do Envio {response.status_code}\n')
