@@ -122,7 +122,7 @@ class NGSI_Wrapper:
 
   def enviar_proximo_batch(self, verboso=False):
     # selecionando próximo lote de envio
-    query = 'select * from casos_covid where date in (select date from casos_covid where sent_to_broker <> 1 order by date limit(1)) and sent_to_broker=0;'
+    query = 'select * from casos_covid where date in (select date from casos_covid where sent_to_broker = 0 order by date limit(1)) and sent_to_broker=0;'
     prox_lote = self.executar_query(query)
     qtd_itens = len(prox_lote)
     # intervalo = 10 / (len(prox_lote))
