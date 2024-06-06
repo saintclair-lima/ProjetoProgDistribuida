@@ -122,7 +122,7 @@ class NGSI_Wrapper:
     query = 'select * from casos_covid where date in (select date from casos_covid where sent_to_broker <> 1 order by date limit(1)) and sent_to_broker=0;'
     prox_lote = self.executar_query(query)
     qtd_itens = len(prox_lote)
-    intervalo = 60 / (len(prox_lote))
+    intervalo = 10 / (len(prox_lote))
     #if intervalo > 10: intervalo = 5
     #if intervalo < 1: intervalo = 1
     
@@ -140,7 +140,7 @@ class NGSI_Wrapper:
       if verboso:
         print(f'>>> Status do Envio {response.status_code}\n')
         if response.status_code != 201: print(response.reason)
-      #time.sleep(intervalo)
+      time.sleep(intervalo)
 
   def enviar_fluxo_ao_broker(self, verboso=True):
     num_registros_por_enviar = self.executar_query('select count(*) from casos_covid where sent_to_broker = 0')[0][0]
