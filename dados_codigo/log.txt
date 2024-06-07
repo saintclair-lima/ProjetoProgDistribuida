@@ -1,0 +1,2 @@
+Erro ao executar query:
+update casos_covid set sent_to_broker = 1 where num_item = 35237
