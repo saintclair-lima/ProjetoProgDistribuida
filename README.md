@@ -28,9 +28,6 @@ O conjunto de dados conta com 3.853.648 entradas, cada uma correspondendo a um c
 De forma a simplificar o processo de análise, os dados foram ordenados por data de geração e foi adicionada uma coluna (num_item), a qual servirá de id de cada entrada.
 
 Ademais, visto que os dados no conjunto possuem um caráter cronológico, os dados foram ordenados por data de referência das informações (coluna `date`).
-
-Os dados modificados estão acessíveis para download em formato cvs (https://drive.google.com/file/d/1fPgwazLOF9MnHmcXMJrgWKlyhNwwu9Rf/view?usp=sharing) bem como diretamente como um arquivo sqlite3 (https://drive.google.com/file/d/1nOxbOQB9cY8Odp1_st6a4klDCi-dLyKl/view?usp=sharing).
-
 ## Modificação nos Dados
 O objetivo dos dados é serem processados para serem enviados a um Context Broker (Orion) em uma estrutura Fiware, emulando um fluxo contínuo de dados sendo gerados e publicados dia a dia, pelas Secretarias de Saúde de Municípios e Estados brasileiros. Para simplificar o processo, os dados foram migrados do arquivo CSV original para um banco de dados SQLite, como formato intermediário ao formato alvo final.
 
