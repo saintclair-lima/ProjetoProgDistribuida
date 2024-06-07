@@ -1,3 +1,6 @@
+http://10.3.225.203:1026/v2/entities
+http://10.7.99.170:3000/v2/entities
+
 EXEMPLO DE COMO REMOVER ENTIDADS DO BROKER:
 curl --location 'http://10.3.225.203:1026/v2/op/update' --header 'Content-Type: application/json' --data '{
 "actionType":"delete",
@@ -10,15 +13,17 @@ curl --location 'http://10.3.225.203:1026/v2/op/update' --header 'Content-Type: 
 
 EXEMPLO DE COMO CONSULTAR ENTIDADES NO BROKER
 curl -G -X GET "http://10.7.99.170:3010/v2/entities" \
--d "type=Daily_COVID_Cases_In_City_Geolocation" \
-  -H 'X-Auth-token: 0d0b959abbeafcfb5f6a9252c246ab93a13601c6'
+  -d "type=Daily_COVID_Cases_In_City_Geolocation" \
+  -d "options=count" \
+  -d "limit=1" \
+  -H 'X-Auth-token: a916b36ac4c1cc82d0e4686a78db6fcda2107f6d'
 
 EXEMPLO DE COMO CONSULTAR A QUANTIDADE DE REGISTROS
 curl -i -G -X GET "http://10.7.99.170:3010/v2/entities" \
   -d "type=Daily_COVID_Cases_In_City_Geolocation" \
   -d "options=count" \
   -d "limit=1" \
-  -H 'X-Auth-token: 0d0b959abbeafcfb5f6a9252c246ab93a13601c6'
+  -H 'X-Auth-token: a916b36ac4c1cc82d0e4686a78db6fcda2107f6d'
 
 curl -G -X GET 'http://10.3.225.203:1026/v2/entities' \
   -d "type=Daily_COVID_Cases_In_City_Geolocation" \
@@ -30,7 +35,7 @@ curl -G -X GET 'http://10.3.225.203:1026/v2/entities' \
 curl -iX POST \
   'http://10.7.99.170:3010/v2/entities' \
   -H 'Content-Type: application/json' \
-  -H 'X-Auth-token: 0d0b959abbeafcfb5f6a9252c246ab93a13601c6' \
+  -H 'X-Auth-token: a916b36ac4c1cc82d0e4686a78db6fcda2107f6d' \
   -d '{"type": "Daily_COVID_Cases_In_City_Geolocation", "id": "urn:ngsi-ld:Daily_COVID_Cases_In_City_Geolocation:3", "cidade": {"type": "Text", "value": "São Paulo"}, "codigo_cidade_IBGE": {"type": "Text", "value": 3550308}, "data": {"type": "Date", "value": "2020-02-26"}, "semana_epidemiologica": {"type": "Integer", "value": 202009}, "populacao_estimada": {"type": "Numeric", "value": 12325232.0}, "populacao_estimada_2019": {"type": "Numeric", "value": 12252023.0}, "ultima": {"type": "Boolean", "value": "false"}, "repetida": {"type": "Boolean", "value": "false"}, "ultimo_confirmados_disponivel": {"type": "Numeric", "value": 1.0}, "ultimo_confirmados_por_100K_habit_disponivel": {"type": "Numeric", "value": 0.00811}, "ultimo_data_disponivel": {"type": "Date", "value": "2020-02-26"}, "ultimo_taxa_de_obito_disponivel": {"type": "Numeric", "value": 0.0}, "ultimo_obitos_disponivel": {"type": "Numeric", "value": 0.0}, "ordem_da_localidade": {"type": "Numeric", "value": 2}, "tipo_da_localidade": {"type": "Text", "value": "city"}, "unidade_federativa": {"type": "Text", "value": "SP"}, "novo_confirmados": {"type": "Numeric", "value": 0.0}, "novo_obitos": {"type": "Numeric", "value": 0.0}, "latitude": {"type": "Numeric", "value": -23.58685}, "longitude": {"type": "Numeric", "value": -46.4212244447853}, "altitude": {"type": "Numeric", "value": 831.417279}, "timestamp": {"type": "Text", "value": 831.417279}}'
 
 Comando para inicializar o container já executando o script
