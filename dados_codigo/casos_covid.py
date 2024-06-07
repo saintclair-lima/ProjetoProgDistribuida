@@ -5,7 +5,7 @@ import time
 import sys
 
 # URL_ORION = 'http://10.7.99.170:3000/v2/entities'
-# TOKEN = 'ee7ff0524bd473d4c8ffcb0ec8ee2d3a2af14fa5'
+# TOKEN = '9cca152d3c1241e312e563efa55f0774f7fd637f'
 try:
   URL_ORION = sys.argv[1]
   TOKEN = sys.argv[2]
