@@ -43,7 +43,7 @@ class NGSI_Wrapper:
   def get_registro_formatado(self, registro, verboso=False):
     reg_formatado = {
       "type" : "Daily_COVID_Cases_In_City_Geolocation",
-      "id" : f"urn:ngsi-ld:Daily_COVID_Cases_In_City_Geolocation:{registro[0]}",
+      "id" : f"urn:ngsi-ld:Daily_COVID_Cases_In_City_Geolocation:{registro[0]}.{registro[2]}",
       "cidade" : {
         "type" : "Text",
         "value" : registro[1]
