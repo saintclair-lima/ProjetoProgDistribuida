@@ -10,8 +10,8 @@ try:
   URL_ORION = sys.argv[1]
   TOKEN = sys.argv[2]
 except:
-  URL_ORION = ''
-  TOKEN = ''
+  URL_ORION = sys.argv[1]
+  TOKEN = None
 
 class Tabela:
   def __init__(self, banco_de_dados, tabela):
@@ -152,7 +152,8 @@ class NGSI_Wrapper:
       if verboso: print(f">>> Item com id {item[0]} - {idx + 1} de {qtd_itens}")
       reg_formatado = self.get_registro_formatado(item)
       payload = json.dumps(reg_formatado, ensure_ascii=False)
-      headers = {'Content-Type': 'application/json', 'X-Auth-token': TOKEN}
+      if TOKEN: headers = {'Content-Type': 'application/json', 'X-Auth-token': TOKEN}
+      else: headers = {'Content-Type': 'application/json'}
       response = requests.post(URL_ORION, headers=headers, data=payload)
       if response.status_code == 201:
         query = f'update casos_covid set sent_to_broker = 1 where num_item = {item[0]}'
