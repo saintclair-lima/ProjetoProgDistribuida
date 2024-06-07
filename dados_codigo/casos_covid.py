@@ -172,7 +172,7 @@ class NGSI_Wrapper:
                 arq.write(f'Erro ao executar query: {query}\n')
               print('Erro ao atualizar banco de dados')
           print(response.reason)
-      #time.sleep(intervalo)
+    time.sleep(30)
 
   def enviar_fluxo_ao_broker(self, verboso=True):
     num_registros_por_enviar = self.executar_query('select count(*) from casos_covid where sent_to_broker = 0')[0][0]
