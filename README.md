@@ -37,8 +37,8 @@ O objetivo dos dados é serem processados para serem enviados a um Context Broke
 De forma a ser aceito pelo Orion, os dados necessariamente devem estar de acordo com as especificações do NGSI (as quais são brevemente introduzidas nesta página https://fiware-zone.readthedocs.io/es/stable/getting-started.html). Dessa forma, as colunas acima são formatadas no seguinte modelo de dados:
 ```json
 {
-  "type": "Daily_COVID_Cases_In_City",
-  "id": "urn:ngsi-ld:Daily_COVID_Cases_In_City:2",
+  "type": "Daily_COVID_Cases_In_City_Geolocation",
+  "id": "urn:ngsi-ld:Daily_COVID_Cases_In_City_Geolocation:2",
   "cidade": {
     "type": "Text",
     "value": ""
@@ -110,7 +110,23 @@ De forma a ser aceito pelo Orion, os dados necessariamente devem estar de acordo
   "novo_obitos": {
     "type": "Numeric",
     "value": 0
-  }
+  },
+    "latitude" : {
+    "type" : "Numeric",
+    "value" : -7.209221
+    },
+    "longitude" : {
+    "type" : "Numeric",
+    "value" : -36.824277
+    },
+    "altitude" : {
+    "type" : "Numeric",
+    "value" : 125.0
+    },
+    "timestamp" : {
+      "type" : "Text",
+      "value" : "2024-06-06 12:12:12.000"
+    },
 }
 ```
 # Informações sobre os municípios
